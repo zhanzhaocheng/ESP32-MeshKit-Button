@@ -204,7 +204,8 @@ static void button_led_show_key_push()
 
     if (mdf_info_load(BUTTON_ESPNOW_CONFIG_STORE_KEY, &espnow_config,
                       sizeof(mlink_espnow_config_t)) == MDF_OK
-            && mlink_trigger_is_exist()) {
+            && mlink_trigger_is_exist()
+            && (!mwifi_is_started() || mwifi_is_connected())) {
         button_driver_led_set_rgb(0, 255, 0);   /**< green */
     } else {
         button_driver_led_set_rgb(128, 128, 0); /**< yellow */
